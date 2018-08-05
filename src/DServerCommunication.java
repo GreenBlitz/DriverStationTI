@@ -64,7 +64,35 @@ public class DServerCommunication extends Thread {
 
             ps.println("{\"Battery\":"+DSEv3Communication.init().getRobotBaterry()+"}");
             while (working) {
-                while(!scan.hasNext()){}
+                while(!scan.hasNext()){
+                    try {
+                        if (socket.getInputStream().read() == -1) {
+                            ps.close();
+                            scan.close();
+                            output.close();
+                            input.close();
+                            socket.close();
+                            socket = null;
+                            working = false;
+                        }
+                    }catch (Exception x){
+                        working = false;
+                    }
+                }
+
+                try {
+                    if (socket.getInputStream().read() == -1) {
+                        ps.close();
+                        scan.close();
+                        output.close();
+                        input.close();
+                        socket.close();
+                        socket = null;
+                        working = false;
+                    }
+                }catch (Exception x){
+                    working = false;
+                }
 
                 String str = scan.next();
 

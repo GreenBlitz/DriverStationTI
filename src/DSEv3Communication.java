@@ -87,12 +87,33 @@ public class DSEv3Communication extends Thread{
                     while (working) {
                         while (!scan.hasNext()) {
                             try {
-                                if (input.read() == -1) {
+                                if (socket.getInputStream().read() == -1) {
+                                    writer.kill();;
+                                    ps.close();
+                                    scan.close();
+                                    output.close();
+                                    input.close();
+                                    socket.close();
+                                    socket = null;
                                     working = false;
                                 }
                             }catch (Exception x){
                                 working = false;
                             }
+                        }
+                        try {
+                            if (socket.getInputStream().read() == -1) {
+                                writer.kill();
+                                ps.close();
+                                scan.close();
+                                output.close();
+                                input.close();
+                                socket.close();
+                                socket = null;
+                                working = false;
+                            }
+                        }catch (Exception x){
+                            working = false;
                         }
                         String str = scan.next();
                         if(str == "-1")

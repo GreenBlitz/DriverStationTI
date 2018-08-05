@@ -30,7 +30,6 @@ public class DSEv3Writer extends Thread{
             ps.println(RobotData.JSON_MATCH_DATA_PARSER.toJson(m));
             Thread.sleep(20);
             while(working){
-
                 RobotData.NativeJoystickData[] joy = new RobotData.NativeJoystickData[1];
                 joy[0] = new RobotData.NativeJoystickData(ControllerBoy.init().getAxis(), ControllerBoy.init().getButtons(), true);
                 RobotData.StationDataCache s = new RobotData.StationDataCache(joy, DSEv3Communication.init().getGameState(), DSEv3Communication.init().getRobotState() == "Enable");
@@ -47,5 +46,9 @@ public class DSEv3Writer extends Thread{
             thread = new Thread(this, name);
             thread.start();
         }
+    }
+
+    public void kill(){
+        working = false;
     }
 }
