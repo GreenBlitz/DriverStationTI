@@ -41,7 +41,7 @@ public class DSEv3Communication extends Thread{
         battery = 0;
         this.name = "Ev3Communication";
         working = true;
-        ip = "127.0.0.1";
+        ip = "";
     }
 
     public static DSEv3Communication init(){
@@ -53,6 +53,7 @@ public class DSEv3Communication extends Thread{
 
     @Override
     public void run(){
+        while(ip == ""){}
         while (always) {
             try {
                 Socket soc;
