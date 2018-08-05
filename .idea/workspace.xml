@@ -2,23 +2,16 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="DriverStationTI:jar" />
+      <artifact name="DriverStationTI:jar2" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99a311fb-5d0f-46b2-b9ad-3a0d45e5523e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/DriverStationTI/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DriverStationTI_jar/DriverStationTI.jar" afterPath="$PROJECT_DIR$/out/artifacts/DriverStationTI_jar/DriverStationTI.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DriverStationTI/DSEv3Communication.class" afterPath="$PROJECT_DIR$/out/production/DriverStationTI/DSEv3Communication.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DriverStationTI/DSEv3Writer.class" afterPath="$PROJECT_DIR$/out/production/DriverStationTI/DSEv3Writer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DriverStationTI/DServerCommunication$1.class" afterPath="$PROJECT_DIR$/out/production/DriverStationTI/DServerCommunication$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DriverStationTI/DServerCommunication.class" afterPath="$PROJECT_DIR$/out/production/DriverStationTI/DServerCommunication.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/DriverStationTI_jar2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/DriverStationTI_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/DriverStationTI_jar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DSEv3Communication.java" afterPath="$PROJECT_DIR$/src/DSEv3Communication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DSEv3Writer.java" afterPath="$PROJECT_DIR$/src/DSEv3Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DServerCommunication.java" afterPath="$PROJECT_DIR$/src/DServerCommunication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DriverStationTI.iml" afterPath="$PROJECT_DIR$/DriverStationTI.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +30,8 @@
       <file leaf-file-name="DServerCommunication.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DServerCommunication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="84" column="29" lean-forward="false" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+            <state relative-caret-position="290">
+              <caret line="101" column="22" lean-forward="true" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -203,6 +196,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../WorkingProjects/DriverStationTIVersion1.1" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/projects/DriverStationTI/src/UI.java" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -616,7 +612,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -993,8 +989,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DServerCommunication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="84" column="29" lean-forward="false" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+        <state relative-caret-position="290">
+          <caret line="101" column="22" lean-forward="true" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1004,13 +1000,18 @@
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
-          <artifact-editor />
+          <artifact-editor>
+            <show-content>
+              <type id="library" />
+              <type id="artifact" />
+            </show-content>
+          </artifact-editor>
           <last-edited>DriverStationTI:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
+                <option value="0.50941026" />
               </list>
             </option>
           </splitter-proportions>
@@ -1058,7 +1059,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
