@@ -150,7 +150,11 @@ public class ControllerBoy {
         }
         if(!foundControllers.isEmpty()) {
             control = foundControllers.get(0);
-            control.poll();
+            try{
+            	control.poll();
+            }catch(NullPointerException x){
+            	x.printStackTrace();
+            }
             for(int i = 0; control.getType() == Controller.Type.MOUSE  || i < foundControllers.size(); i++) {
                 control = foundControllers.get(i);
                 control.poll();

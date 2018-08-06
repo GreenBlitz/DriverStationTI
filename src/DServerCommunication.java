@@ -22,6 +22,7 @@ public class DServerCommunication extends Thread {
     private boolean working;
     private static DServerCommunication instance;
     private boolean canChange = true;
+    private volatile boolean mIsClosed = false;
 
     private DServerCommunication(){
         name = "DriverStationServerCommunicator";
@@ -52,7 +53,7 @@ public class DServerCommunication extends Thread {
                     Thread.sleep(100);
                     socket = soc;
                 } catch (Exception x) {
-                    System.out.println("connect to an ev3!");
+                    System.out.println("connect to an server! #1");
                     //  x.printStackTrace();
                 }
             }
@@ -151,6 +152,7 @@ public class DServerCommunication extends Thread {
             output.close();
             soc.close();
             socket.close();
+            mIsClosed = true;
         }catch (IOException x){
 
         }
@@ -178,5 +180,8 @@ public class DServerCommunication extends Thread {
             thread.start();
         }
     }
-
+    
+    public boolean isClosed() {
+    	return mIsClosed;
+    }
 }

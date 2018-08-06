@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/DriverStationTI"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="gson-2.8.1" value="project"/>
+		<level name="java-json" value="project"/>
+		<level name="jinput" value="project"/>
+	</levels>
+</component>

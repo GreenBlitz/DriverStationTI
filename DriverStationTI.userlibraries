@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="gson-2.8.1">
+    <archive path="C:/git/DriverStationTI/gson-2.8.1.jar" />
+  </library>
+  <library name="java-json">
+    <archive path="C:/git/DriverStationTI/java-json.jar" />
+  </library>
+  <library name="jinput">
+    <archive path="C:/git/DriverStationTI/jinput.jar" />
+  </library>
+  <library name="la4j-0.6.0">
+    <archive path="C:/fsflibs/la4j-0.6.0.jar" />
+  </library>
+  <library name="navx_frc">
+    <archive path="C:/fsflibs/navx_frc.jar" />
+  </library>
+  <library name="scala-sdk-2.12.5">
+    <archive path="C:/Program Files (x86)/scala/lib/scala-library.jar" />
+    <archive path="C:/Program Files (x86)/scala/lib/scala-parser-combinators_2.12-1.0.7.jar" />
+    <archive path="C:/Program Files (x86)/scala/lib/scala-reflect.jar" />
+    <archive path="C:/Program Files (x86)/scala/lib/scala-swing_2.12-2.0.0.jar" />
+    <archive path="C:/Program Files (x86)/scala/lib/scala-xml_2.12-1.0.6.jar" />
+  </library>
+  <library name="WPILib-sources">
+    <archive path="C:/fsflibs/NetworkTables.jar" />
+    <archive path="C:/fsflibs/WPILib.jar" />
+  </library>
+</eclipse-userlibraries>
+

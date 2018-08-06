@@ -41,7 +41,7 @@ public class DSEv3Communication extends Thread{
         battery = 0;
         this.name = "Ev3Communication";
         working = true;
-        ip = "";
+        ip = "10.0.1.1";
     }
 
     public static DSEv3Communication init(){
@@ -58,51 +58,35 @@ public class DSEv3Communication extends Thread{
             try {
                 Socket soc;
                 while (socket == null) {
+                	System.out.println("attampted ocnnection to {ip= " + ip + ", port= " + port + "}");
                     try { ///yolo
                         soc = new Socket(ip, port);
                         Thread.sleep(100);
                         socket = soc;
                     } catch (Exception x) {
                         System.out.println("connect to an ev3!");
-                        //  x.printStackTrace();
                     }
                 }
-                System.out.println("yugrdfyftuuyfyugfftfftuytufuftuyutfutfyyfyytutfutfutftyytdyryrdsrsystrstrsyrytytdytdytd");
-                System.out.println("yugrdfyftuuyfyugfftfftuytufuftuyutfutfyyfyytutfutfutftyytdyryrdsrsystrstrsyrytytdytdytd");
-                System.out.println("yugrdfyftuuyfyugfftfftuytufuftuyutfutfyyfyytutfutfutftyytdyryrdsrsystrstrsyrytytdytdytd");
-                System.out.println("yugrdfyftuuyfyugfftfftuytufuftuyutfutfyyfyytutfutfutftyytdyryrdsrsystrstrsyrytytdytdytd");
-                System.out.println("yugrdfyftuuyfyugfftfftuytufuftuyutfutfyyfyytutfutfutftyytdyryrdsrsystrstrsyrytytdytdytd");
-                System.out.println("yugrdfyftuuyfyugfftfftuytufuftuyutfutfyyfyytutfutfutftyytdyryrdsrsystrstrsyrytytdytdytd");
-                System.out.println("yugrdfyftuuyfyugfftfftuytufuftuyutfutfyyfyytutfutfutftyytdyryrdsrsystrstrsyrytytdytdytd");
-                System.out.println("yugrdfyftuuyfyugfftfftuytufuftuyutfutfyyfyytutfutfutftyytdyryrdsrsystrstrsyrytytdytdytd");
                 accepted = true;
                 working = true;
                 input = new DataInputStream(socket.getInputStream());
                 output = new DataOutputStream(socket.getOutputStream());
                 scan = new Scanner(input);
-                ps = new PrintStream(output);
+                ps = new PrintStream(output, true);
                 DSEv3Writer writer = new DSEv3Writer(ps);
                 writer.start();
                 try {
                     while (working) {
-                        while (!scan.hasNext()) {
-                            try {
-                                if (socket.getInputStream().read() == -1) {
-                                    writer.kill();;
-                                    ps.close();
-                                    scan.close();
-                                    output.close();
-                                    input.close();
-                                    socket.close();
-                                    socket = null;
-                                    working = false;
-                                }
-                            }catch (Exception x){
-                                working = false;
-                            }
-                        }
+                        while (!scan.hasNext()) {}
+                       
+                        String str = scan.next();
+                        
+                        battery = RobotData.JSON_Station_DATA_PARSER.fromJson(str).battery;
+                        extra = RobotData.JSON_Station_DATA_PARSER.fromJson(str).extra;
+                        System.out.println(str);
+                        
                         try {
-                            if (socket.getInputStream().read() == -1) {
+                            if (extra == "kill") {
                                 writer.kill();
                                 ps.close();
                                 scan.close();
@@ -115,12 +99,6 @@ public class DSEv3Communication extends Thread{
                         }catch (Exception x){
                             working = false;
                         }
-                        String str = scan.next();
-                        if(str == "-1")
-                            working = false;
-                        battery = RobotData.JSON_Station_DATA_PARSER.fromJson(str).battery;
-                        extra = RobotData.JSON_Station_DATA_PARSER.fromJson(str).extra;
-                        System.out.println(str);
                     }
                 } catch (IOException x) {
                     x.printStackTrace();

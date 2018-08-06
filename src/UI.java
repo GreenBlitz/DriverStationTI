@@ -1,6 +1,7 @@
 
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,10 +17,10 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class UI extends Application{
 	private boolean canActivate = false;
@@ -27,15 +28,17 @@ public class UI extends Application{
 	private ComboBox teamComboBox;
 	private TextArea ipArea;
 	private boolean enable = false;
-
+	private static DServerCommunication serverCommunication;
+	
 	public static void main(String[] args){
 		try{
-            DServerCommunication serverCommunication = DServerCommunication.init();
+            serverCommunication = DServerCommunication.init();
             serverCommunication.start();
 		}catch (Exception x){
 			x.printStackTrace();
 		}
 		launch(args);
+		
 	}
 	
 	@Override
@@ -213,13 +216,22 @@ public class UI extends Application{
 		//Creating Scene and loading it
 		Scene scene = new Scene(driverStation, 750, 375);
 		dsStage.setScene(scene);
+		dsStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent t) {
+		        Platform.exit();
+		        serverCommunication.kill();
+		        while (!serverCommunication.isClosed()) {}
+		        System.exit(0);
+		    }
+		});
 		dsStage.show();
 	}
 
 	public void setActivate(){
 	    canActivate = DServerCommunication.init().canChange();
 	}
-
+	
 	public boolean getActivate(){
 		return canActivate;
 	}

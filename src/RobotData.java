@@ -51,12 +51,12 @@ public class RobotData {
         public NativeJoystickData(int axesCount, int buttonCount, boolean isvalid) {
             axes = new float[axesCount];
             buttons = new boolean[buttonCount];
-            isValid = isValid;
+            isValid = isvalid;
         }
         public NativeJoystickData(float[] axesCount, boolean[] buttonCount, boolean isvalid) {
             axes = axesCount;
             buttons = buttonCount;
-            isValid = isValid;
+            isValid = isvalid;
         }
 
         public NativeJoystickData() {
