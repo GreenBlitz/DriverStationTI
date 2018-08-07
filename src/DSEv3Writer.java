@@ -41,10 +41,12 @@ public class DSEv3Writer extends Thread {
 						DSEv3Communication.init().getGameState(),
 						DSEv3Communication.init().getRobotState() == "Enable");
 				String send = RobotData.JSON_CACHE_PARSER.toJson(s);
-				System.out.println(send);
-				ps.println(send);
-				ps.flush();
-				Thread.sleep(100);
+				System.out.println(send + System.currentTimeMillis());
+				//ps.println(send);
+				//ps.flush();
+				Printer printer = new Printer(ps, send);
+				printer.start();
+				Thread.sleep(200);
 			}
 		} catch (Exception x) {
 			x.printStackTrace();
