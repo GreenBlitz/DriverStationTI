@@ -1,6 +1,8 @@
 import com.google.gson.Gson;
 
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 public class DSEv3Writer extends Thread {
@@ -22,6 +24,10 @@ public class DSEv3Writer extends Thread {
 	@Override
 	public void run() {
 		try {
+			File file = new File("prints.txt");
+			file.setWritable(true);
+			FileOutputStream fileOutput = new FileOutputStream(file ,true);
+			PrintStream fileStream = new PrintStream(fileOutput);
 			DSEv3Communication com = DSEv3Communication.init();
 			alliance = DServerCommunication.init().getAlliance();
 			ControllerBoy cb = ControllerBoy.init();
@@ -42,10 +48,10 @@ public class DSEv3Writer extends Thread {
 						DSEv3Communication.init().getRobotState() == "Enable");
 				String send = RobotData.JSON_CACHE_PARSER.toJson(s);
 				System.out.println(send + System.currentTimeMillis());
-				//ps.println(send);
-				//ps.flush();
-				Printer printer = new Printer(ps, send);
-				printer.start();
+				fileStream.println(send);
+				fileStream.flush();
+				ps.println(send);
+				ps.flush();
 				Thread.sleep(200);
 			}
 		} catch (Exception x) {
