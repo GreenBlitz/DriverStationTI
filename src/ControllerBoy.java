@@ -83,13 +83,13 @@ public class ControllerBoy {
             // updating the axis!
             if(components[i].isAnalog()){
                 f = components[i].getPollData();
-                f = (float) (f - f%0.001);
+                f = (float) (f - f%0.01);
+                if(counterA % 2 == 0)
+                	f = -f;
                 if(f < 0.15 && f > -0.15)
                     f = 0;
                 if(f >0.93 || f < -0.93)
                     f = 1 * f/Math.abs(f);
-                if(counterA % 2 == 0)
-                	f = -f;
                 axis[counterA] = f;
                 counterA++;
             }else if(components[i].getIdentifier().getName().matches("^[0-9]*$")){

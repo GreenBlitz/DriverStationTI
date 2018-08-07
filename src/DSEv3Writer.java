@@ -39,7 +39,8 @@ public class DSEv3Writer extends Thread {
 			m.alliance = alliance;
 			m.eventName = "";
 			m.gameSpecificMessage = "";
-			System.out.println(RobotData.JSON_MATCH_DATA_PARSER.toJson(m));
+			DriverStationTimer timer = DriverStationTimer.getInstance();
+			System.out.println("Time: "+timer.getCurrentServerTime()+", Message: "+RobotData.JSON_MATCH_DATA_PARSER.toJson(m));
 			ps.println(RobotData.JSON_MATCH_DATA_PARSER.toJson(m));
 			ps.flush();
 			while (working) {
@@ -50,8 +51,8 @@ public class DSEv3Writer extends Thread {
 						DSEv3Communication.init().getGameState(),
 						DSEv3Communication.init().getRobotState() == "Enable");
 				String send = RobotData.JSON_CACHE_PARSER.toJson(s);
-				System.out.println(send + System.currentTimeMillis());
-				fileStream.println(send);
+				System.out.println("Time: "+timer.getCurrentServerTime()+", Message: "+send);
+				fileStream.println("Time: "+timer.getCurrentServerTime()+", Message: "+send);
 				fileStream.flush();
 				//ps.println(send);
 				//ps.flush();
