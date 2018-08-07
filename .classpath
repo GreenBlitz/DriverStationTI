@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/git/DriverStationTI/gson-2.8.1.jar"/>
-	<classpathentry kind="lib" path="C:/git/DriverStationTI/java-json.jar"/>
-	<classpathentry kind="lib" path="C:/git/DriverStationTI/jinput.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/leJOS EV3 eclipse/Workspace/DriverStationTI/gson-2.8.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/leJOS EV3 eclipse/Workspace/DriverStationTI/java-json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/leJOS EV3 eclipse/Workspace/DriverStationTI/jinput.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jre7/lib/jfxrt.jar"/>
 	<classpathentry kind="output" path="out/production/DriverStationTI"/>
 </classpath>
