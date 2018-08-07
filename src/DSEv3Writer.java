@@ -9,6 +9,7 @@ public class DSEv3Writer extends Thread {
 	private String name;
 	private Thread thread;
 	private PrintStream ps;
+	int time;
 	private RobotData.Alliance alliance;
 	private boolean working;
 	// private DataOutputStream output;
@@ -17,6 +18,7 @@ public class DSEv3Writer extends Thread {
 		this.name = "Ev3WritingThread";
 		// this.ps = ps;
 		this.ps = output;
+		time = 0;
 		working = true;
 		alliance = RobotData.Alliance.NONE;
 	}
@@ -24,6 +26,7 @@ public class DSEv3Writer extends Thread {
 	@Override
 	public void run() {
 		try {
+			Printer print;
 			File file = new File("prints.txt");
 			file.setWritable(true);
 			FileOutputStream fileOutput = new FileOutputStream(file ,true);
@@ -50,8 +53,10 @@ public class DSEv3Writer extends Thread {
 				System.out.println(send + System.currentTimeMillis());
 				fileStream.println(send);
 				fileStream.flush();
-				ps.println(send);
-				ps.flush();
+				//ps.println(send);
+				//ps.flush();
+				print = new Printer("PrinterNumber"+time, ps, send);
+				print.start();
 				Thread.sleep(200);
 			}
 		} catch (Exception x) {
