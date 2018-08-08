@@ -67,6 +67,7 @@ public class DSEv3Communication extends Thread{
                         System.out.println("connect to an ev3!");
                     }
                 }
+                DServerCommunication.init().setRobotConnection(true);
                 accepted = true;
                 working = true;
                 input = new DataInputStream(socket.getInputStream());
