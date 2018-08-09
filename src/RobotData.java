@@ -12,7 +12,7 @@ public class RobotData {
      * @author karlo
      */
     public enum Alliance {
-        RED1(1), RED2(2), BLUE1(1), BLUE2(2), NONE(0);
+        RED1(1), RED2(2), BLUE1(1), BLUE2(2), NONE(-1);
 
         public final int position;
 
@@ -60,7 +60,7 @@ public class RobotData {
         }
 
         public NativeJoystickData() {
-            this(6, 18, false);
+            this(6, 18, true);
         }
     }
 
@@ -73,6 +73,7 @@ public class RobotData {
         public String eventName;
         public String gameSpecificMessage;
         public Alliance alliance;
+		public String ip;
     }
 
     /**

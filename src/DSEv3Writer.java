@@ -13,7 +13,6 @@ public class DSEv3Writer extends Thread {
 
 	public DSEv3Writer(PrintStream output) {
 		this.name = "Ev3WritingThread";
-		// this.ps = ps;
 		this.ps = output;
 		working = true;
 		alliance = RobotData.Alliance.NONE;
@@ -30,6 +29,7 @@ public class DSEv3Writer extends Thread {
 			m.alliance = alliance;
 			m.eventName = "";
 			m.gameSpecificMessage = "";
+			m.ip = com.getIp();
 			System.out.println(RobotData.JSON_MATCH_DATA_PARSER.toJson(m));
 			ps.println(RobotData.JSON_MATCH_DATA_PARSER.toJson(m));
 			ps.flush();
@@ -44,7 +44,6 @@ public class DSEv3Writer extends Thread {
 				System.out.println(send);
 				ps.println(send);
 				ps.flush();
-				Thread.sleep(100);
 			}
 		} catch (Exception x) {
 			x.printStackTrace();

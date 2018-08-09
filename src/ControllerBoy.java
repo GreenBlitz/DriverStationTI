@@ -34,7 +34,7 @@ public class ControllerBoy {
 
     public void waitToConnection(){
         while(!isConnected()){
-            System.out.println("Waiting for the fucking son!");
+            System.out.println("No joystick available");
         }
     }
 

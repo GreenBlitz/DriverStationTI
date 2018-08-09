@@ -33,6 +33,7 @@ public class DSEv3Communication extends Thread{
     private boolean accepted = false;
     private String ip;
     private String extra;
+    private ServerSocket mServer;
     Gson jo;
 
     private DSEv3Communication(){
@@ -56,13 +57,11 @@ public class DSEv3Communication extends Thread{
         while(ip == ""){}
         while (always) {
             try {
-                Socket soc;
+            	if (mServer == null)
+                    mServer = new ServerSocket(port);
                 while (socket == null) {
-                	System.out.println("attampted ocnnection to {ip= " + ip + ", port= " + port + "}");
-                    try { ///yolo
-                        soc = new Socket(ip, port);
-                        Thread.sleep(100);
-                        socket = soc;
+                    try {
+                        socket = mServer.accept();
                     } catch (Exception x) {
                         System.out.println("connect to an ev3!");
                     }
