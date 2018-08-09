@@ -83,6 +83,9 @@ public class ControllerBoy {
             // updating the axis!
             if(components[i].isAnalog()){
                 f = components[i].getPollData();
+                f = (float) (f - f%0.01);
+                if(counterA % 2 == 0)
+                	f = -f;
                 if(f < 0.15 && f > -0.15)
                     f = 0;
                 if(f >0.93 || f < -0.93)

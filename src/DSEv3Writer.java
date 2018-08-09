@@ -1,12 +1,14 @@
-import com.google.gson.Gson;
-
-import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
+
+import com.google.gson.Gson;
 
 public class DSEv3Writer extends Thread {
 	private String name;
 	private Thread thread;
 	private PrintStream ps;
+	int time;
 	private RobotData.Alliance alliance;
 	private boolean working;
 	// private DataOutputStream output;
@@ -14,6 +16,7 @@ public class DSEv3Writer extends Thread {
 	public DSEv3Writer(PrintStream output) {
 		this.name = "Ev3WritingThread";
 		this.ps = output;
+		time = 0;
 		working = true;
 		alliance = RobotData.Alliance.NONE;
 	}
@@ -21,6 +24,11 @@ public class DSEv3Writer extends Thread {
 	@Override
 	public void run() {
 		try {
+			Printer print;
+			File file = new File("prints.txt");
+			file.setWritable(true);
+			FileOutputStream fileOutput = new FileOutputStream(file ,true);
+			PrintStream fileStream = new PrintStream(fileOutput);
 			DSEv3Communication com = DSEv3Communication.init();
 			alliance = DServerCommunication.init().getAlliance();
 			ControllerBoy cb = ControllerBoy.init();

@@ -22,14 +22,20 @@ public class DServerCommunication extends Thread {
     private boolean working;
     private static DServerCommunication instance;
     private boolean canChange = true;
+    private boolean robotConnection;
     private volatile boolean mIsClosed = false;
 
+    public void setRobotConnection(boolean robotC){
+    	robotConnection = robotC;
+    }
+    
     private DServerCommunication(){
         name = "DriverStationServerCommunicator";
         alliance = RobotData.Alliance.NONE;
         gameState = RobotData.GameType.TELEOP;
         serverIp = "127.0.0.1";
         port= 2212;
+        robotConnection = false;
         working = true;
     }
 
@@ -63,85 +69,68 @@ public class DServerCommunication extends Thread {
             Scanner scan = new Scanner(input);
             PrintStream ps = new PrintStream(output);
 
-            ps.println("{\"Battery\":"+DSEv3Communication.init().getRobotBaterry()+"}");
             while (working) {
-                while(!scan.hasNext()){
-                    try {
-                        if (socket.getInputStream().read() == -1) {
-                            ps.close();
-                            scan.close();
-                            output.close();
-                            input.close();
-                            socket.close();
-                            socket = null;
-                            working = false;
-                        }
-                    }catch (Exception x){
-                        working = false;
+            	ps.println("{\"Battery\":"+DSEv3Communication.init().getRobotBaterry()+",Connection:"+robotConnection+"}");
+            	ps.flush();
+            	
+            	try{
+            		Thread.sleep(100);
+            	}catch(Exception x){
+            		x.printStackTrace();
+            	}
+                if(scan.hasNext()){
+                	String str = scan.next();
+
+                    data  = DataDS.JSON_DSDATA.fromJson(str);
+                    extra = data.extra;
+                    
+                    if(extra == "kill"){
+                    	working = false;
                     }
-                }
 
-                try {
-                    if (socket.getInputStream().read() == -1) {
-                        ps.close();
-                        scan.close();
-                        output.close();
-                        input.close();
-                        socket.close();
-                        socket = null;
-                        working = false;
+                    switch (data.id){
+                        case 0:
+                            alliance = RobotData.Alliance.BLUE1;
+                            break;
+                        case 1:
+                            alliance = RobotData.Alliance.BLUE2;
+                            break;
+                        case 2:
+                            alliance = RobotData.Alliance.RED1;
+                            break;
+                        case 3:
+                            alliance = RobotData.Alliance.RED2;
+                            break;
                     }
-                }catch (Exception x){
-                    working = false;
-                }
 
-                String str = scan.next();
-
-                data  = DataDS.JSON_DSDATA.fromJson(str);
-                extra = data.extra;
-
-                switch (data.id){
-                    case 0:
-                        alliance = RobotData.Alliance.BLUE1;
-                        break;
-                    case 1:
-                        alliance = RobotData.Alliance.BLUE2;
-                        break;
-                    case 2:
-                        alliance = RobotData.Alliance.RED1;
-                        break;
-                    case 3:
-                        alliance = RobotData.Alliance.RED2;
-                        break;
-                }
-
-                switch (data.state){
-                    case PreGame:
-                        canChange = false;
-                        DSEv3Communication.init().disableAuto();
-                        break;
-                    case PostGame:
-                        DSEv3Communication.init().disableTele();
-                        break;
-                    case FinishGame:
-                        canChange = true;
-                        DSEv3Communication.init().disableTele();
-                        break;
-                    case Disable:
-                        DSEv3Communication.init().disableTele();
-                        break;
-                    case Enable:
-                        DSEv3Communication.init().enableTele();
-                        break;
-                    case Auto:
-                        DSEv3Communication.init().enableAuto();
-                        break;
-                    case Tele:
-                        DSEv3Communication.init().enableTele();
-                        break;
-                    default:
-                        DSEv3Communication.init().disableTele();
-                        break;
+                    switch (data.state){
+                        case PreGame:
+                            canChange = false;
+                            DSEv3Communication.init().disableAuto();
+                            break;
+                        case PostGame:
+                            DSEv3Communication.init().disableTele();
+                            break;
+                        case FinishGame:
+                            canChange = true;
+                            DSEv3Communication.init().disableTele();
+                            break;
+                        case Disable:
+                            DSEv3Communication.init().disableTele();
+                            break;
+                        case Enable:
+                            DSEv3Communication.init().enableTele();
+                            break;
+                        case Auto:
+                            DSEv3Communication.init().enableAuto();
+                            break;
+                        case Tele:
+                            DSEv3Communication.init().enableTele();
+                            break;
+                        default:
+                            DSEv3Communication.init().disableTele();
+                            break;
+                    }
                 }
 
             }
