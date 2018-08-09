@@ -24,34 +24,30 @@ public class DSEv3Writer extends Thread {
 	@Override
 	public void run() {
 		try {
-			Printer print;
-			File file = new File("prints.txt");
-			file.setWritable(true);
-			FileOutputStream fileOutput = new FileOutputStream(file ,true);
-			PrintStream fileStream = new PrintStream(fileOutput);
 			DSEv3Communication com = DSEv3Communication.init();
 			alliance = DServerCommunication.init().getAlliance();
 			ControllerBoy cb = ControllerBoy.init();
-			Gson j = new Gson();
-			RobotData.MatchSpecificData m = new RobotData.MatchSpecificData();
+			RobotData.InitialMatchData m = new RobotData.InitialMatchData();
 			m.alliance = alliance;
 			m.eventName = "";
-			m.gameSpecificMessage = "";
+			m.gameMessage = "";
 			m.ip = com.getIp();
 			System.out.println(RobotData.JSON_MATCH_DATA_PARSER.toJson(m));
 			ps.println(RobotData.JSON_MATCH_DATA_PARSER.toJson(m));
 			ps.flush();
+
 			while (working) {
 				RobotData.NativeJoystickData[] joy = new RobotData.NativeJoystickData[1];
 				joy[0] = new RobotData.NativeJoystickData(ControllerBoy.init().getAxis(),
 						ControllerBoy.init().getButtons(), true);
-				RobotData.StationDataCache s = new RobotData.StationDataCache(joy,
+				RobotData.PeriodicMatchData s = new RobotData.PeriodicMatchData(joy,
 						DSEv3Communication.init().getGameState(),
 						DSEv3Communication.init().getRobotState() == "Enable");
 				String send = RobotData.JSON_CACHE_PARSER.toJson(s);
 				System.out.println(send);
 				ps.println(send);
 				ps.flush();
+				Thread.sleep(50);
 			}
 		} catch (Exception x) {
 			x.printStackTrace();
