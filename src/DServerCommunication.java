@@ -85,7 +85,7 @@ public class DServerCommunication extends Thread {
                     extra = data.extra;
                     
                     if(extra == "kill"){
-                    	working = false;
+                    	kill();
                     }
 
                     switch (data.id){
@@ -157,6 +157,7 @@ public class DServerCommunication extends Thread {
 
     public void kill(){
         working = false;
+        DSEv3Communication.init().finalize();
     }
 
     public boolean isWorking(){
